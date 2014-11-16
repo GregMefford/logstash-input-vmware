@@ -38,17 +38,18 @@ class LogStash::Inputs::VMware < LogStash::Inputs::Base
   def register
     require 'rbvmomi'
     logger.info("Registering VMware Input", :host => @host, :port => @port)
+    connection
   end # def register
 
   private
   def connection
     @connection ||= RbVmomi::VIM.connect(
-      :host => @host,
-      :port => @port,
-      :ssl => @https,
-      :insecure => @insecure,
-      :user => @username,
-      :password => @password,
+      :host => host,
+      :port => port,
+      :ssl => https,
+      :insecure => insecure,
+      :user => username,
+      :password => password,
     )
   end # def connection
 

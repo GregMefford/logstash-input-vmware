@@ -9,19 +9,19 @@ module LogStash::Config::Mixin
 
   def config_init(params)
     # Set defaults from 'config :foo, :default => somevalue'
-    params = Hash.new
+    defaults = Hash.new
     self.class.get_config.each do |name, opts|
       if opts.include?(:default)
         # Clone the default values if possible
         case opts[:default]
           when FalseClass, TrueClass, NilClass, Numeric
-            params[name] = opts[:default]
+            defaults[name] = opts[:default]
           else
-            params[name] = opts[:default].clone
+            defaults[name] = opts[:default].clone
         end
       end
     end
-    params.merge!(params)
+    params = defaults.merge(params)
     params.each do |key, value|
       instance_variable_set("@#{key}", value)
     end
