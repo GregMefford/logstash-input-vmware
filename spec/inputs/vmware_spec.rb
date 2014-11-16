@@ -3,10 +3,13 @@ require "spec_helper"
 require "logstash/inputs/vmware"
 
 describe 'inputs/vmware' do
-  context "Connecting to an ESXi host using unvalidated HTTPS", :vcr do
+  context "Connecting to an ESXi 5.5 host using unvalidated HTTPS", :vcr do
+    # NOTE: If VCR doesn't already have a cassette for the test you're running,
+    # you'll need to have a HOSTS file entry or DNS record to point the hostname
+    # 'esxi_5_5' to a VMware host running ESXi 5.5.
     Given(:plugin) { LogStash::Inputs::VMware.new(
-      "host" => 'esxi_5_5',
-      "user" => 'metrics',
+      "host"     => 'esxi_5_5',
+      "username" => 'metrics',
       "password" => 'metrics',
       "insecure" => true,
     )}

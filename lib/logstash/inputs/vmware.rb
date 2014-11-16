@@ -1,6 +1,5 @@
 # encoding: utf-8
 require "logstash/inputs/base"
-require "logstash/namespace"
 
 # This input collects information from a VMware ESXi hosts or vCenter Servers.
 #
@@ -14,8 +13,6 @@ require "logstash/namespace"
 class LogStash::Inputs::VMware < LogStash::Inputs::Base
   config_name "vmware"
   milestone 1
-
-  default :codec, "plain"
 
   # The hostname or IP address of the ESXi host or vCenter server.
   config :host, :validate => :string, :default => "127.0.0.1"
@@ -40,7 +37,7 @@ class LogStash::Inputs::VMware < LogStash::Inputs::Base
   public
   def register
     require 'rbvmomi'
-    @logger.info("Registering VMware Input", :host => @host, :port => @port)
+    logger.info("Registering VMware Input", :host => @host, :port => @port)
   end # def register
 
   private
@@ -57,7 +54,7 @@ class LogStash::Inputs::VMware < LogStash::Inputs::Base
 
   public
   def run(output_queue)
-    @logger.info("VMware Input entering run loop", :host => @host, :port => @port)
+    logger.info("VMware Input entering run loop", :host => @host, :port => @port)
     loop do
       # TBD
       sleep 1
@@ -66,7 +63,7 @@ class LogStash::Inputs::VMware < LogStash::Inputs::Base
 
   public
   def teardown
-    @logger.info("Tearing-Down VMware Input", :host => @host, :port => @port)
+    logger.info("Tearing-Down VMware Input", :host => @host, :port => @port)
     connection.close
   end #def teardown
 end # class LogStash::Inputs::VMware
