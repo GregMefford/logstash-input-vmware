@@ -21,7 +21,11 @@ Gem::Specification.new do |s|
 
   # Gem dependencies
   s.add_runtime_dependency 'logstash', '>= 1.4.0', '< 2.0.0'
-
   s.add_runtime_dependency 'rbvmomi'
+
+  s.add_development_dependency 'rspec-given', '~> 3.5'
+  s.add_development_dependency 'webmock', '~> 1.20'
+  s.add_development_dependency 'vcr', '~> 2.9'
+  s.add_development_dependency 'logstash-fakes', '>= 0.1'
 
 end

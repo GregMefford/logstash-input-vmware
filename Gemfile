@@ -7,6 +7,7 @@ group :development do
   gem 'gem_publisher'
   gem 'archive-tar-minitar'
   gem 'awesome_print'
+  gem 'logstash-fakes'
 end
 
 group :test do
